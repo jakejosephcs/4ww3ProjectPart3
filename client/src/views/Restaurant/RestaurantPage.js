@@ -20,6 +20,7 @@ export default function RestaurantPage({ token }) {
         setRest(res.data);
         formatReviews(res.data.reviews);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formatReviews = (reviews) => {

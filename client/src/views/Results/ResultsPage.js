@@ -24,17 +24,13 @@ export default function ResultsPage({
           setRest(filterByRating(res.data));
         }
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filterByQuery = (rest) => {
-    return rest.filter((r) => {
-      const restName = r.name;
-      if (restName.toLowerCase().includes(query.toLowerCase())) {
-        return r;
-      } else {
-        return;
-      }
-    });
+    return rest.filter(
+      (r) => r.name.toLowerCase().includes(query.toLowerCase()) && r
+    );
   };
 
   const filterByRating = (rest) => {
