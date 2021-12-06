@@ -9,6 +9,30 @@ const verify = require("./verifyToken");
 // Server side validation for the create of new Restaurants
 const { objectValidation } = require("../validation");
 
+// Find all restaurants within a 3000m radius of the provided coordinates
+router.post("/byArea", async (req, res) => {
+  let lat = req.body.lat;
+  let lang = req.body.lng;
+
+  try {
+    let restaurants = await Restaurant.find({
+      location: {
+        $near: {
+          $maxDistance: 3000,
+          $geometry: {
+            type: "Point",
+            coordinates: [lat, lang],
+          },
+        },
+      },
+    });
+
+    res.status(200).send(restaurants);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
 // Create a new Restaurant and update the User's restaurant array
 // Only logged in user's (with a valid JWT) can add new objects
 router.post("/", verify, async (req, res) => {

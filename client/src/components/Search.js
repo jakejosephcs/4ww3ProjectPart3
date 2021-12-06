@@ -20,10 +20,12 @@ export default function Search({
   setQueryRating,
   searchBy,
   setSearchBy,
+  lat,
+  long,
+  setLat,
+  setLong,
 }) {
   const [rest, setRest] = useState([]);
-  const [lat, setLat] = useState(0);
-  const [long, setLong] = useState(0);
 
   let navigate = useNavigate();
 
@@ -45,7 +47,11 @@ export default function Search({
     navigate({ pathname: "/results" });
   };
 
-  const handleSearchByLocation = (e) => {};
+  const handleSearchByLocation = (e) => {
+    e.preventDefault();
+    setSearchBy("location");
+    navigate({ pathname: "/results" });
+  };
 
   const handleGetLocation = (e) => {
     e.preventDefault();

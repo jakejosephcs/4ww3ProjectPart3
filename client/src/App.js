@@ -12,6 +12,8 @@ function App() {
   const [query, setQuery] = useState("");
   const [quertyRating, setQueryRating] = useState(null);
   const [searchBy, setSearchBy] = useState(null);
+  const [lat, setLat] = useState(0);
+  const [long, setLong] = useState(0);
 
   const [token, setToken] = useState(null);
 
@@ -37,6 +39,10 @@ function App() {
               setQueryRating={setQueryRating}
               searchBy={searchBy}
               setSearchBy={setSearchBy}
+              lat={lat}
+              setLat={setLat}
+              long={long}
+              setLong={setLong}
             />
           }
         ></Route>
@@ -59,6 +65,10 @@ function App() {
               setQueryRating={setQueryRating}
               searchBy={searchBy}
               setSearchBy={setSearchBy}
+              lat={lat}
+              setLat={setLat}
+              long={long}
+              setLong={setLong}
             />
           }
         ></Route>

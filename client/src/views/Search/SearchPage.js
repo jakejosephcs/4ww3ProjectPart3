@@ -8,6 +8,10 @@ export default function SearchPage({
   setQueryRating,
   searchBy,
   setSearchBy,
+  lat,
+  long,
+  setLat,
+  setLong,
 }) {
   return (
     <div>
@@ -18,6 +22,10 @@ export default function SearchPage({
         setQueryRating={setQueryRating}
         searchBy={searchBy}
         setSearchBy={setSearchBy}
+        lat={lat}
+        setLat={setLat}
+        long={long}
+        setLong={setLong}
       />
     </div>
   );

@@ -1,6 +1,17 @@
 // Object modelling library for NodeJS
 const mongoose = require("mongoose");
 
+// Used for location based search (https://medium.com/@oshanm1/how-to-find-nearby-locations-within-a-radius-using-mongodb-bbb5f57005f1)
+const geoSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    default: "Point",
+  },
+  coordinates: {
+    type: [Number],
+  },
+});
+
 // Describes the document structure of the Restaurant object (akin to a table in SQL)
 // A Restaruant can have a (some required some not):
 // 1. Name
@@ -16,15 +27,8 @@ const RestaurantSchema = new mongoose.Schema({
     required: true,
   },
   location: {
-    type: {
-      type: String, // Don't do `{ location: { type: String } }`
-      enum: ["Point"], // 'location.type' must be 'Point'
-      required: true,
-    },
-    coordinates: {
-      type: [Number],
-      required: true,
-    },
+    type: geoSchema,
+    index: "2dsphere",
   },
   description: {
     type: String,

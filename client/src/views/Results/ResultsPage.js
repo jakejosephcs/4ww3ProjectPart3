@@ -11,19 +11,36 @@ export default function ResultsPage({
   setQueryRating,
   searchBy,
   setSearchBy,
+  lat,
+  long,
+  setLat,
+  setLong,
 }) {
   const [rest, setRest] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants")
-      .then((res) => {
-        if (searchBy === "query") {
-          setRest(filterByQuery(res.data));
-        } else if (searchBy === "rating") {
-          setRest(filterByRating(res.data));
-        }
-      });
+    if (searchBy === "query" || searchBy === "rating") {
+      axios
+        .get("https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants")
+        .then((res) => {
+          if (searchBy === "query") {
+            setRest(filterByQuery(res.data));
+          } else if (searchBy === "rating") {
+            setRest(filterByRating(res.data));
+          }
+        });
+    } else {
+      axios
+        .post(
+          "https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants/byArea",
+          {
+            lat: lat,
+            lng: long,
+          }
+        )
+        .then(({ data }) => setRest(data))
+        .catch((e) => console.log(e));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
