@@ -22,6 +22,8 @@ export default function Search({
   setSearchBy,
 }) {
   const [rest, setRest] = useState([]);
+  const [lat, setLat] = useState(0);
+  const [long, setLong] = useState(0);
 
   let navigate = useNavigate();
 
@@ -42,6 +44,22 @@ export default function Search({
     setSearchBy("rating");
     navigate({ pathname: "/results" });
   };
+
+  const handleSearchByLocation = (e) => {};
+
+  const handleGetLocation = (e) => {
+    e.preventDefault();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showLocation);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  };
+
+  function showLocation(position) {
+    setLat(position.coords.latitude);
+    setLong(position.coords.longitude);
+  }
 
   return (
     <div>
@@ -84,10 +102,24 @@ export default function Search({
           </Button>
         </InputGroup>
         <InputGroup className="mb-3">
-          <Button variant="outline-secondary">Get my Location</Button>
-          <FormControl aria-label="First name" placeholder="Latitude" />
-          <FormControl aria-label="Last name" placeholder="Longitude" />
-          <Button variant="outline-secondary">Search by Location</Button>
+          <Button variant="outline-secondary" onClick={handleGetLocation}>
+            Get my Location
+          </Button>
+          <FormControl
+            aria-label="Latitude entry"
+            placeholder="Latitude"
+            value={lat}
+            onChange={(e) => setLat(e.target.value)}
+          />
+          <FormControl
+            aria-label="Longitude entry"
+            placeholder="Longitude"
+            value={long}
+            onChange={(e) => setLong(e.target.value)}
+          />
+          <Button variant="outline-secondary" onClick={handleSearchByLocation}>
+            Search by Location
+          </Button>
         </InputGroup>
       </Container>
       <Container>
