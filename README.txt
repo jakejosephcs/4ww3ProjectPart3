@@ -41,11 +41,3 @@ The CSS is handled using react bootstrap
 Add-on 3: React (instead of AJAX)
 The submitted reviews are automatically appened to the page without reload using React.
 React only updates parts of the DOM that have changed and therefore, does not reload the page.
-
-To do:
-- Mention that we used react to do the add on task (did not reload the page to add the new review)
-- Mention how you got approval from Ethan to use the MERN stack
-- Mention that you hash the password
-- Mention how we are using token based authentication using JWT
-
-- Mention extension (only 5% off)
