@@ -56,6 +56,7 @@ export default function RestaurantPage({ token }) {
   return (
     <React.Fragment>
       <Container>
+        <h2>{rest.name}</h2>
         <Card>
           <Card.Img variant="top" src={rest.image} />
           <Card.Body>
@@ -73,6 +74,7 @@ export default function RestaurantPage({ token }) {
         </Card>
       </Container>
       <Container>
+        <h4>Reviews for {rest.name}</h4>
         {reviews.length > 0 &&
           reviews.map((review) => (
             <Card key={review.data._id}>
@@ -82,6 +84,7 @@ export default function RestaurantPage({ token }) {
           ))}
       </Container>
       <Container>
+        <h4>Submit a new review for {rest.name}:</h4>
         {token ? (
           <Form onSubmit={handleReviewSubmission}>
             <Form.Group className="mb-3" controlId="formBasicReview">
@@ -116,6 +119,7 @@ export default function RestaurantPage({ token }) {
         )}
       </Container>
       <Container>
+        <h4>Location of {rest.name}</h4>
         <MapContainer
           center={[43.64437547647877, -79.38664463335483]}
           zoom={13}
