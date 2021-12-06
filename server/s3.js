@@ -10,7 +10,7 @@ const randomBytes = promisify(crypto.randomBytes);
 
 // AWS info
 const region = "us-east-2";
-const bucketName = "s3-bucket-for-images-4ww3";
+const bucketName = "4ww3-project-part-3-images";
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.AWS_SECRET_KEY_ID;
 
