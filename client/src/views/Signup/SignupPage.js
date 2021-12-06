@@ -51,6 +51,7 @@ export default function SignupPage() {
 
   return (
     <Container>
+      <h3>Sign up:</h3>
       {isError && (
         <ToastContainer position="top-end" className="p-3">
           <Toast>

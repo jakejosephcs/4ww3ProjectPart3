@@ -22,7 +22,7 @@ export default function LoginPage({ setToken }) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("/api/auth/login", {
+      .post("https://jake-4ww3-project-part-3.herokuapp.com/api/auth/login", {
         email,
         password,
       })
@@ -40,6 +40,7 @@ export default function LoginPage({ setToken }) {
   };
   return (
     <Container>
+      <h3>Log in:</h3>
       {isError && (
         <ToastContainer position="top-end" className="p-3">
           <Toast>
