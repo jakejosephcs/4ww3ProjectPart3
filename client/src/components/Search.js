@@ -89,6 +89,11 @@ export default function Search({
           <FormControl aria-label="Last name" placeholder="Longitude" />
           <Button variant="outline-secondary">Search by Location</Button>
         </InputGroup>
+      </Container>
+      <Container>
+        <h3>All Restaurants:</h3>
+      </Container>
+      <Container>
         <Row xs={1} md={2} className="g-4">
           {rest.map((_, idx) => (
             <Col>

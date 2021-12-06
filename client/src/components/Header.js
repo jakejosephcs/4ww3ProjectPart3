@@ -14,12 +14,26 @@ export default function Header({ token }) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Link to="/">Home</Link>
+              <Nav.Link>
+                <Link to="/">Home</Link>
+              </Nav.Link>
               {/* Only logged in user's can submit new reviews */}
-              {token && <Link to="/submission">Add a New Restaurant</Link>}
+              {token && (
+                <Nav.Link>
+                  <Link to="/submission">Add a New Restaurant</Link>
+                </Nav.Link>
+              )}
               {/* Logged in user's DO NOT see the Sign in and Sign up link */}
-              {!token && <Link to="/signin">Sign in</Link>}
-              {!token && <Link to="/signup">Sign up</Link>}
+              {!token && (
+                <Nav.Link>
+                  <Link to="/signin">Sign in</Link>
+                </Nav.Link>
+              )}
+              {!token && (
+                <Nav.Link>
+                  <Link to="/signup">Sign up</Link>
+                </Nav.Link>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
