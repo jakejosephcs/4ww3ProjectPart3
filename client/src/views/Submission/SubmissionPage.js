@@ -70,6 +70,7 @@ export default function SubmissionPage({ token }) {
 
   return (
     <Container>
+      <h2>Add a new Restaurant</h2>
       {isError && (
         <ToastContainer position="top-end" className="p-3">
           <Toast>
