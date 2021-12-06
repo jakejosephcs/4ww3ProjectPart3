@@ -25,13 +25,16 @@ export default function SignupPage() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://jake-4ww3-project.herokuapp.com/api/auth/register", {
-        firstName,
-        lastName,
-        email,
-        password,
-        gender,
-      })
+      .post(
+        "https://jake-4ww3-project-part-3.herokuapp.com/api/auth/register",
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+          gender,
+        }
+      )
       .then((res) => {
         console.log(res);
         setIsError(false);

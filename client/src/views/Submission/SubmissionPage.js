@@ -39,7 +39,7 @@ export default function SubmissionPage({ token }) {
 
     axios
       .post(
-        "https://jake-4ww3-project.herokuapp.com/api/restaurants/",
+        "https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants/",
         {
           name,
           location: [latitude, longitude],
