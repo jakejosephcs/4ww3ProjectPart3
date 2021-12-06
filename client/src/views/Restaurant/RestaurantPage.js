@@ -78,7 +78,7 @@ export default function RestaurantPage({ token }) {
         {reviews.length > 0 &&
           reviews.map((review) => (
             <Card key={review.data._id}>
-              <Card.Header>{review.data.rating}</Card.Header>
+              <Card.Header>User Rating: {review.data.rating}</Card.Header>
               <Card.Body>{review.data.text}</Card.Body>
             </Card>
           ))}
