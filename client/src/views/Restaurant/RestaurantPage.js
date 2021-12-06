@@ -121,7 +121,7 @@ export default function RestaurantPage({ token }) {
       <Container>
         <h4>Location of {rest.name}</h4>
         <MapContainer
-          center={[43.64437547647877, -79.38664463335483]}
+          center={[rest.location.coordinates[0], rest.location.coordinates[1]]}
           zoom={13}
           scrollWheelZoom={false}
         >
