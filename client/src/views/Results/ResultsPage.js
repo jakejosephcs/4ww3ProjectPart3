@@ -16,7 +16,7 @@ export default function ResultsPage({
 
   useEffect(() => {
     axios
-      .get("https://jake-4ww3-project.herokuapp.com/api/restaurants")
+      .get("https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants")
       .then((res) => {
         if (searchBy === "query") {
           setRest(filterByQuery(res.data));

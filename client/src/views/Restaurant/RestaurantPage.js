@@ -15,7 +15,9 @@ export default function RestaurantPage({ token }) {
 
   useEffect(() => {
     axios
-      .get(`https://jake-4ww3-project.herokuapp.com/api/restaurants/${id}`)
+      .get(
+        `https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants/${id}`
+      )
       .then((res) => {
         setRest(res.data);
         formatReviews(res.data.reviews);
@@ -25,7 +27,7 @@ export default function RestaurantPage({ token }) {
 
   const formatReviews = (reviews) => {
     const formattedReviews = reviews.map((reviewId) => {
-      return `https://jake-4ww3-project.herokuapp.com/api/reviews/${reviewId}`;
+      return `https://jake-4ww3-project-part-3.herokuapp.com/api/reviews/${reviewId}`;
     });
     Promise.all(formattedReviews.map((review) => axios.get(review))).then(
       (data) => setReviews(data)
@@ -36,7 +38,7 @@ export default function RestaurantPage({ token }) {
     e.preventDefault();
     axios
       .post(
-        "https://jake-4ww3-project.herokuapp.com/api/reviews",
+        "https://jake-4ww3-project-part-3.herokuapp.com/api/reviews",
         {
           text: review,
           rating,

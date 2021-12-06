@@ -22,7 +22,7 @@ export default function LoginPage({ setToken }) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://jake-4ww3-project.herokuapp.com/api/auth/login", {
+      .post("/api/auth/login", {
         email,
         password,
       })

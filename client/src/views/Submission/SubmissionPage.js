@@ -25,7 +25,9 @@ export default function SubmissionPage({ token }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const { url } = await fetch("/s3Url").then((res) => res.json());
+    const { url } = await fetch("/s3Url")
+      .then((res) => res.json())
+      .catch((err) => console.log(err));
 
     await fetch(url, {
       method: "PUT",
