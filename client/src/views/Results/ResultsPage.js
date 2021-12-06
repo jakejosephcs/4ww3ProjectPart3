@@ -47,6 +47,7 @@ export default function ResultsPage({
 
   return (
     <Container>
+      <h2>Results for {query}</h2>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
