@@ -25,7 +25,9 @@ export default function SubmissionPage({ token }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const { url } = await fetch("/s3Url")
+    const { url } = await fetch(
+      "https://jake-4ww3-project-part-3.herokuapp.com/s3Url"
+    )
       .then((res) => res.json())
       .catch((err) => console.log(err));
 
