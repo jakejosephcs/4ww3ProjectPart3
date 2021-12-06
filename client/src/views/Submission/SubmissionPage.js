@@ -10,27 +10,33 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function SubmissionPage({ token }) {
+  // State used to store the user's info
   const [name, setName] = useState("");
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
 
+  // State for any errors
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorStatus, setErrorStatus] = useState("");
 
+  // Used to redirect
   let navigate = useNavigate();
 
+  // Fires when we submit
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
+    // Makes a get request to the AWS S3 bucket for the image url
     const { url } = await fetch(
       "https://jake-4ww3-project-part-3.herokuapp.com/s3Url"
     )
       .then((res) => res.json())
       .catch((err) => console.log(err));
 
+    // Puts the image into our AWS S3 bucket
     await fetch(url, {
       method: "PUT",
       headers: {
@@ -39,8 +45,10 @@ export default function SubmissionPage({ token }) {
       body: image,
     });
 
+    // Grabs the image url from the url response
     const imageUrl = url.split("?")[0];
 
+    // Add the new object (with the image url) to the MongoDB database
     axios
       .post(
         "https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants/",
@@ -68,6 +76,7 @@ export default function SubmissionPage({ token }) {
       });
   };
 
+  // Renders the page using React Bootstrap
   return (
     <Container>
       <h2>Add a new Restaurant</h2>

@@ -10,20 +10,25 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
+  // State used to store the user's info
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
 
+  // State for any errors
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorStatus, setErrorStatus] = useState("");
 
+  // Used to redirect
   let navigate = useNavigate();
 
+  // Fires when we submit
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    // Creates a new user by sending a POST req to the register endpoint
     axios
       .post(
         "https://jake-4ww3-project-part-3.herokuapp.com/api/auth/register",
@@ -49,6 +54,7 @@ export default function SignupPage() {
       });
   };
 
+  // Renders the page using React Bootstrap
   return (
     <Container>
       <h3>Sign up:</h3>

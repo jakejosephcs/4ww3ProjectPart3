@@ -7,12 +7,15 @@ import "../../App.css";
 import axios from "axios";
 
 export default function RestaurantPage({ token }) {
+  // Grab the object id from the url
   const { id } = useParams();
+  // State used to set the resto, the reviews, the review and the rating
   const [rest, setRest] = useState({});
   const [reviews, setReviews] = useState([]);
   const [review, setReview] = useState([]);
   const [rating, setRating] = useState(0);
 
+  // Fired on page load to grab the object with the given id in the url
   useEffect(() => {
     axios
       .get(
@@ -25,6 +28,7 @@ export default function RestaurantPage({ token }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Formats reviews by making a call to the reviews end point to get all reviews for a certain restaurant
   const formatReviews = (reviews) => {
     const formattedReviews = reviews.map((reviewId) => {
       return `https://jake-4ww3-project-part-3.herokuapp.com/api/reviews/${reviewId}`;
@@ -34,8 +38,10 @@ export default function RestaurantPage({ token }) {
     );
   };
 
+  // Fire when a user submits a new review
   const handleReviewSubmission = (e) => {
     e.preventDefault();
+    // Makes a post request to the reviews end point and then updates the page WITHOUT reload
     axios
       .post(
         "https://jake-4ww3-project-part-3.herokuapp.com/api/reviews",
@@ -53,6 +59,7 @@ export default function RestaurantPage({ token }) {
       .then((res) => setReviews((reviews) => [...reviews, res]));
   };
 
+  // Renders the page using React Bootstrap
   return (
     <React.Fragment>
       <Container>
@@ -118,6 +125,7 @@ export default function RestaurantPage({ token }) {
           <p>Please log in to leave a review</p>
         )}
       </Container>
+      {/* Renders the map using the object's location */}
       <Container>
         <h4>Location of {rest.name}</h4>
         <MapContainer

@@ -16,8 +16,10 @@ export default function ResultsPage({
   setLat,
   setLong,
 }) {
+  // Stores the resto to display
   const [rest, setRest] = useState([]);
 
+  // On page load, we check what we searched by (query, rating or location)
   useEffect(() => {
     if (searchBy === "query" || searchBy === "rating") {
       axios
@@ -44,12 +46,14 @@ export default function ResultsPage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Filter all reso by name (if they include the query in them)
   const filterByQuery = (rest) => {
     return rest.filter(
       (r) => r.name.toLowerCase().includes(query.toLowerCase()) && r
     );
   };
 
+  // Filter reso by their rating (takes the avg of all rating array that each resto has)
   const filterByRating = (rest) => {
     const restWithAvgRating = rest.map((r) => {
       const ratingSum = r.rating.reduce((a, b) => a + b, 0);
@@ -60,8 +64,7 @@ export default function ResultsPage({
     return restWithAvgRating.filter((r) => r.rating === parseInt(quertyRating));
   };
 
-  console.log(rest);
-
+  // Renders the page using React Bootstrap
   return (
     <Container>
       <h2>Results for {query}</h2>

@@ -1,0 +1,44 @@
+PLEASE NOTE: Project was submitted one day late. The Professor granted only a 5% penatly and NOT 20%
+
+This application was created using the MERN stack (with approval from the Professor):
+- MongoDB as the document database
+- Express as the NodeJS framework
+- React to handle all the front end logic
+- Nodejs to handle all the server size logic
+- Githib Repo: https://github.com/jakejosephcs/RestaurantProject
+
+The application will be split up into two components:
+1. The server
+2. The client
+
+SERVER:
+In the models folder, we are describing the structure of "tables" (documents in MongoDB). This consists of:
+- Restaurant "table"
+- Review "table"
+- User "table"
+In the routes folder, we are handling how requests of different types and url's are handled
+- auth.js handles user registration and login
+- restaurant.js handles all restaurant requests
+- reviews.js handles all review requests
+- verifyToken.js uses JWT to ensure that a logged in user can create an Object and add a Review
+All senitive data is stored inside .env
+The server side logic begins in index.js
+The s3.js file handles all server side logic for AWS S3 image upload
+The validation.js file is used for server side validation
+
+CLIENT:
+The client side is created using React
+The src folder is where all the client side logic resides
+The components folder contains reusable components 
+The views folder contains the pages that the user will server
+All logic begins inside the App.js file
+The index.js file is where we append the logic to the DOM
+The CSS is handled using react bootstrap
+
+To do:
+- Mention that we used react to do the add on task (did not reload the page to add the new review)
+- Mention how you got approval from Ethan to use the MERN stack
+- Mention that you hash the password
+- Mention how we are using token based authentication using JWT
+
+- Mention extension (only 5% off)

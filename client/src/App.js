@@ -1,3 +1,4 @@
+// Entry point for the client side. This file is responsible for routing
 import { useState, useEffect, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
@@ -9,21 +10,27 @@ import ResultsPage from "./views/Results/ResultsPage";
 import SubmissionPage from "./views/Submission/SubmissionPage";
 
 function App() {
+  // Global state passed down to components that share it
   const [query, setQuery] = useState("");
   const [quertyRating, setQueryRating] = useState(null);
   const [searchBy, setSearchBy] = useState(null);
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
 
+  // State for the JWT token
   const [token, setToken] = useState(null);
 
+  // When the page loads, we check if the user is logged in by grabbing the JWT token from local storage
   useEffect(() => {
     setToken(localStorage.getItem("token"));
   }, []);
 
+  // Renders the page using React Bootstrap
   return (
     <Fragment>
+      {/* Header is present on every page */}
       <Header token={token} />
+      {/* Routes based on URL */}
       <Routes>
         <Route
           path="/restaurant/:id"
