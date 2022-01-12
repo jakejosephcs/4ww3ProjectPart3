@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import {
-  Container,
-  InputGroup,
-  FormControl,
-  Button,
-  Form,
-  Row,
-  Col,
-  Card,
-} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "../App.css";
+import axios from "axios";
+
+import SearchOptions from "./SearchOptions";
+import Restaurants from "./Restaurants";
+import { Divider, Chip, Container } from "@mui/material";
 
 export default function Search({
   query,
@@ -32,7 +25,7 @@ export default function Search({
   // When the page loads, we grab all restaurants that are in our MongoDB database
   useEffect(() => {
     axios
-      .get("https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants/")
+      .get("http://localhost:5000/api/restaurants/")
       .then(({ data }) => setRest(data));
   }, []);
 
@@ -77,90 +70,29 @@ export default function Search({
     setLong(position.coords.longitude);
   }
 
-  // Renders the page using React Bootstrap
   return (
-    <div>
-      <Container fluid>
-        {/* Search by various ways (query, rating, location) */}
-        <InputGroup className="mb-3">
-          <FormControl
-            placeholder="Reastaurant Name e.g., Baro"
-            aria-label="Reastaurant name"
-            aria-describedby="basic-addon2"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <Button
-            variant="outline-secondary"
-            id="button-addon2"
-            onClick={handleSearchByQuery}
-          >
-            Search by Reastaurant Name
-          </Button>
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <Form.Select
-            aria-label="Default select example"
-            value={quertyRating}
-            onChange={(e) => setQueryRating(e.target.value)}
-          >
-            <option>Select a Rating</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </Form.Select>
-          <Button
-            variant="outline-secondary"
-            id="button-addon2"
-            onClick={handleSearchByRating}
-          >
-            Search by Reastaurant Rating
-          </Button>
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <Button variant="outline-secondary" onClick={handleGetLocation}>
-            Get my Location
-          </Button>
-          <FormControl
-            aria-label="Latitude entry"
-            placeholder="Latitude"
-            value={lat}
-            onChange={(e) => setLat(e.target.value)}
-          />
-          <FormControl
-            aria-label="Longitude entry"
-            placeholder="Longitude"
-            value={long}
-            onChange={(e) => setLong(e.target.value)}
-          />
-          <Button variant="outline-secondary" onClick={handleSearchByLocation}>
-            Search by Location
-          </Button>
-        </InputGroup>
-      </Container>
-      <Container>
-        {/* Display all restaurants in DB */}
-        <h3>All Restaurants:</h3>
-      </Container>
-      <Container>
-        <Row xs={1} md={2} className="g-4">
-          {rest.map((_, idx) => (
-            <Col>
-              <Card>
-                <Card.Img variant="top" src={_.image} />
-                <Card.Body>
-                  <Card.Title>
-                    <a href={`/restaurant/${_._id}`}>{_.name}</a>
-                  </Card.Title>
-                  <Card.Text>{_.description}</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    </div>
+    <Container maxWidth="md">
+      <Divider>
+        <Chip label="Search a Restaurant" />
+      </Divider>
+      <SearchOptions
+        query={query}
+        setQuery={setQuery}
+        quertyRating={quertyRating}
+        setQueryRating={setQueryRating}
+        lat={lat}
+        long={long}
+        setLat={setLat}
+        setLong={setLong}
+        handleSearchByQuery={handleSearchByQuery}
+        handleSearchByRating={handleSearchByRating}
+        handleGetLocation={handleGetLocation}
+        handleSearchByLocation={handleSearchByLocation}
+      />
+      <Divider>
+        <Chip label="All Restaurant" />
+      </Divider>
+      <Restaurants rest={rest} setRest={setRest} />
+    </Container>
   );
 }
