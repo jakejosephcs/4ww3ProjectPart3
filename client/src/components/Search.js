@@ -77,7 +77,7 @@ export default function Search({
   }
 
   return (
-    <Container maxWidth="md" sx={{ display: "flex", justifyContent: "center" }}>
+    <Container maxWidth="md">
       <Divider sx={{ marginY: 3 }}>
         <Chip label="Search a Restaurant" />
       </Divider>
