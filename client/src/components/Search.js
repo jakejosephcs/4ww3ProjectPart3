@@ -5,6 +5,7 @@ import axios from "axios";
 import SearchOptions from "./SearchOptions";
 import Restaurants from "./Restaurants";
 import { Divider, Chip, Container } from "@mui/material";
+import LoadingButtons from "./Loading";
 
 export default function Search({
   query,
@@ -19,14 +20,19 @@ export default function Search({
   setLong,
 }) {
   const [rest, setRest] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   let navigate = useNavigate();
 
   // When the page loads, we grab all restaurants that are in our MongoDB database
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get("https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants/")
-      .then(({ data }) => setRest(data));
+      .then(({ data }) => {
+        setRest(data);
+        setIsLoading(false);
+      });
   }, []);
 
   // Update the search term to "query" and redirect user to the results page
@@ -71,7 +77,7 @@ export default function Search({
   }
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ display: "flex", justifyContent: "center" }}>
       <Divider sx={{ marginY: 3 }}>
         <Chip label="Search a Restaurant" />
       </Divider>
@@ -92,7 +98,11 @@ export default function Search({
       <Divider sx={{ marginTop: 3 }}>
         <Chip label="All Restaurant" />
       </Divider>
-      <Restaurants rest={rest} setRest={setRest} />
+      {isLoading ? (
+        <LoadingButtons />
+      ) : (
+        <Restaurants rest={rest} setRest={setRest} />
+      )}
     </Container>
   );
 }
