@@ -17,7 +17,7 @@ const reviewRoute = require("./routes/reviews");
 // Initialize express and call the json() method to handle JSON data
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: "https://4ww3-project-jake.netlify.app" }));
+app.use(cors({ origin: "https://strongerapp.netlify.app" }));
 
 // Connect to our MongoDB database
 mongoose.connect(process.env.MONGO_CLUSTER);
