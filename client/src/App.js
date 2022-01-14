@@ -14,8 +14,8 @@ function App() {
   const [query, setQuery] = useState("");
   const [quertyRating, setQueryRating] = useState(null);
   const [searchBy, setSearchBy] = useState(null);
-  const [lat, setLat] = useState(0);
-  const [long, setLong] = useState(0);
+  const [lat, setLat] = useState(null);
+  const [long, setLong] = useState(null);
 
   // State for the JWT token
   const [token, setToken] = useState(null);
@@ -29,7 +29,7 @@ function App() {
   return (
     <Fragment>
       {/* Header is present on every page */}
-      <Header token={token} />
+      <Header token={token} setToken={setToken} />
       {/* Routes based on URL */}
       <Routes>
         <Route
