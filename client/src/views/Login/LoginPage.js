@@ -28,7 +28,7 @@ export default function LoginPage({ setToken }) {
     e.preventDefault();
     // Make a post request to the auth/login route
     axios
-      .post("https://jake-4ww3-project-part-3.herokuapp.com/api/auth/login", {
+      .post("http://localhost:5000/api/auth/login", {
         email,
         password,
       })

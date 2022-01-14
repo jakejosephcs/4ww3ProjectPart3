@@ -1,19 +1,33 @@
 import React, { useState } from "react";
+// import {
+//   Button,
+//   Form,
+//   Container,
+//   Toast,
+//   ToastContainer,
+// } from "react-bootstrap";
 import {
-  Button,
-  Form,
   Container,
-  Toast,
-  ToastContainer,
-} from "react-bootstrap";
+  TextField,
+  Button,
+  Box,
+  Divider,
+  Typography,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+const Input = styled("input")({
+  display: "none",
+});
 
 export default function SubmissionPage({ token }) {
   // State used to store the user's info
   const [name, setName] = useState("");
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
 
@@ -30,9 +44,7 @@ export default function SubmissionPage({ token }) {
     e.preventDefault();
 
     // Makes a get request to the AWS S3 bucket for the image url
-    const { url } = await fetch(
-      "https://jake-4ww3-project-part-3.herokuapp.com/s3Url"
-    )
+    const { url } = await fetch("http://localhost:5000/s3Url")
       .then((res) => res.json())
       .catch((err) => console.log(err));
 
@@ -51,7 +63,7 @@ export default function SubmissionPage({ token }) {
     // Add the new object (with the image url) to the MongoDB database
     axios
       .post(
-        "https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants/",
+        "http://localhost:5000/api/restaurants/",
         {
           name,
           location: [latitude, longitude],
@@ -76,83 +88,95 @@ export default function SubmissionPage({ token }) {
       });
   };
 
-  // Renders the page using React Bootstrap
+  if (!token) {
+    return (
+      <Typography
+        variant="h6"
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
+        Please log in to view this page
+      </Typography>
+    );
+  }
+
   return (
-    <Container>
-      <h2>Add a new Restaurant</h2>
-      {isError && (
-        <ToastContainer position="top-end" className="p-3">
-          <Toast>
-            <Toast.Header
-              onClick={() => {
-                setIsError(false);
-                setErrorMessage("");
-              }}
-            >
-              <img
-                src="holder.js/20x20?text=%20"
-                className="rounded me-2"
-                alt=""
-              />
-              <strong className="me-auto">Error code: {errorStatus}</strong>
-              <small></small>
-            </Toast.Header>
-            <Toast.Body>{errorMessage}</Toast.Body>
-          </Toast>
-        </ToastContainer>
-      )}
-      {token ? (
-        <Form onSubmit={handleFormSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicDescription">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Location</Form.Label>
-            <Form.Control
-              type="number"
-              aria-label="latitude"
-              placeholder="Enter Latitude"
-              value={latitude}
-              onChange={(e) => setLatitude(e.target.value)}
-            />
-            <Form.Control
-              type="number"
-              aria-label="longitude"
-              placeholder="Enter Longitude"
-              value={longitude}
-              onChange={(e) => setLongitude(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Upload and image</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={(e) => setImage(e.target.files[0])}
-              required
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
+    <Container
+      maxWidth="md"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Typography variant="h6">Add a Restaurant</Typography>
+      <Box sx={{ marginBottom: 1, padding: 1 }}>
+        <TextField
+          id="filled-basic"
+          label="Restaurant Name"
+          variant="filled"
+          sx={{ width: "100%" }}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </Box>
+      <Divider light />
+      <Box sx={{ marginBottom: 1, padding: 1 }}>
+        <TextField
+          id="filled-basic"
+          label="Restaurant Description"
+          variant="filled"
+          sx={{ width: "100%" }}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </Box>
+      <Divider light />
+      <Box sx={{ marginBottom: 1, padding: 1 }}>
+        <TextField
+          id="filled-basic"
+          label="Latitude"
+          variant="filled"
+          sx={{ width: "100%", marginBottom: 2 }}
+          value={latitude}
+          onChange={(e) => setLatitude(e.target.value)}
+        />
+        <TextField
+          id="filled-basic"
+          label="Longitude"
+          variant="filled"
+          sx={{ width: "100%" }}
+          value={longitude}
+          onChange={(e) => setLongitude(e.target.value)}
+        />
+      </Box>
+      <Divider light />
+      <Box
+        sx={{
+          marginBottom: 3,
+          padding: 1,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <label htmlFor="contained-button-file">
+          <Input
+            accept="image/*"
+            id="contained-button-file"
+            multiple
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
+            required
+          />
+          <Button
+            variant={`${!image ? "outlined" : "contained"}`}
+            component="span"
+          >
+            {!image ? "Upload an Image" : "Uploaded"}
           </Button>
-        </Form>
-      ) : (
-        <h1>Please log in OR sign up to add a new resto</h1>
-      )}
+        </label>
+      </Box>
+      <Button variant="contained" onClick={handleFormSubmit}>
+        Add Restaurant
+      </Button>
     </Container>
   );
 }

@@ -6,13 +6,13 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 
 export default function ImgMediaCard({ rest, setRest }) {
   return (
     <Container>
       {rest.map((_, idx) => (
-        <Card sx={{ maxWidth: 345, marginY: 3 }}>
+        <Card sx={{ maxWidth: 345, marginTop: 3 }}>
           <CardMedia
             component="img"
             alt="green iguana"
@@ -28,7 +28,9 @@ export default function ImgMediaCard({ rest, setRest }) {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">See More</Button>
+            <Button size="small">
+              <Link to={`/restaurant/${_._id}`}>Learn More</Link>
+            </Button>
           </CardActions>
         </Card>
       ))}

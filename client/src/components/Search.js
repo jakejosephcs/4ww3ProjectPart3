@@ -72,7 +72,7 @@ export default function Search({
 
   return (
     <Container maxWidth="md">
-      <Divider>
+      <Divider sx={{ marginY: 3 }}>
         <Chip label="Search a Restaurant" />
       </Divider>
       <SearchOptions
@@ -89,7 +89,7 @@ export default function Search({
         handleGetLocation={handleGetLocation}
         handleSearchByLocation={handleSearchByLocation}
       />
-      <Divider>
+      <Divider sx={{ marginTop: 3 }}>
         <Chip label="All Restaurant" />
       </Divider>
       <Restaurants rest={rest} setRest={setRest} />

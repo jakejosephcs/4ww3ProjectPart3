@@ -8,6 +8,8 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+// import { authentication } from "../../config/firebase-config";
+// import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 export default function SignupPage() {
   // State used to store the user's info
@@ -30,16 +32,13 @@ export default function SignupPage() {
     e.preventDefault();
     // Creates a new user by sending a POST req to the register endpoint
     axios
-      .post(
-        "https://jake-4ww3-project-part-3.herokuapp.com/api/auth/register",
-        {
-          firstName,
-          lastName,
-          email,
-          password,
-          gender,
-        }
-      )
+      .post("http://localhost:5000/api/auth/register", {
+        firstName,
+        lastName,
+        email,
+        password,
+        gender,
+      })
       .then((res) => {
         console.log(res);
         setIsError(false);
@@ -54,6 +53,17 @@ export default function SignupPage() {
       });
   };
 
+  // return (
+  //   <button
+  //     onClick={() => {
+  //       signInWithPopup(authentication, new GoogleAuthProvider())
+  //         .then((re) => console.log(re))
+  //         .catch((e) => console.log(e));
+  //     }}
+  //   >
+  //     Sign In
+  //   </button>
+  // );
   // Renders the page using React Bootstrap
   return (
     <Container>
