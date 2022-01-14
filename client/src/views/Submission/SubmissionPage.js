@@ -44,7 +44,9 @@ export default function SubmissionPage({ token }) {
     e.preventDefault();
 
     // Makes a get request to the AWS S3 bucket for the image url
-    const { url } = await fetch("http://localhost:5000/s3Url")
+    const { url } = await fetch(
+      "https://jake-4ww3-project-part-3.herokuapp.com/s3Url"
+    )
       .then((res) => res.json())
       .catch((err) => console.log(err));
 
@@ -63,7 +65,7 @@ export default function SubmissionPage({ token }) {
     // Add the new object (with the image url) to the MongoDB database
     axios
       .post(
-        "http://localhost:5000/api/restaurants/",
+        "https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants/",
         {
           name,
           location: [latitude, longitude],

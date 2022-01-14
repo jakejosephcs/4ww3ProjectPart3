@@ -21,17 +21,21 @@ export default function RestaurantPage({ token }) {
 
   // Fired on page load to grab the object with the given id in the url
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/restaurants/${id}`).then((res) => {
-      setRest(res.data);
-      formatReviews(res.data.reviews);
-    });
+    axios
+      .get(
+        `https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants/${id}`
+      )
+      .then((res) => {
+        setRest(res.data);
+        formatReviews(res.data.reviews);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Formats reviews by making a call to the reviews end point to get all reviews for a certain restaurant
   const formatReviews = (reviews) => {
     const formattedReviews = reviews.map((reviewId) => {
-      return `http://localhost:5000/api/reviews/${reviewId}`;
+      return `https://jake-4ww3-project-part-3.herokuapp.com/api/reviews/${reviewId}`;
     });
     Promise.all(formattedReviews.map((review) => axios.get(review))).then(
       (data) => setReviews(data)
@@ -44,7 +48,7 @@ export default function RestaurantPage({ token }) {
     // Makes a post request to the reviews end point and then updates the page WITHOUT reload
     axios
       .post(
-        "http://localhost:5000/api/reviews",
+        "https://jake-4ww3-project-part-3.herokuapp.com/api/reviews",
         {
           text: review,
           rating,

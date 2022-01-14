@@ -20,19 +20,24 @@ export default function ResultsPage({
   // On page load, we check what we searched by (query, rating or location)
   useEffect(() => {
     if (searchBy === "query" || searchBy === "rating") {
-      axios.get("http://localhost:5000/api/restaurants").then((res) => {
-        if (searchBy === "query") {
-          setRest(filterByQuery(res.data));
-        } else if (searchBy === "rating") {
-          setRest(filterByRating(res.data));
-        }
-      });
+      axios
+        .get("https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants")
+        .then((res) => {
+          if (searchBy === "query") {
+            setRest(filterByQuery(res.data));
+          } else if (searchBy === "rating") {
+            setRest(filterByRating(res.data));
+          }
+        });
     } else {
       axios
-        .post("http://localhost:5000/api/restaurants/byArea", {
-          lat: lat,
-          lng: long,
-        })
+        .post(
+          "https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants/byArea",
+          {
+            lat: lat,
+            lng: long,
+          }
+        )
         .then(({ data }) => setRest(data))
         .catch((e) => console.log(e));
     }

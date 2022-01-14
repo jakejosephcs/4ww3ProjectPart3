@@ -25,7 +25,7 @@ export default function Search({
   // When the page loads, we grab all restaurants that are in our MongoDB database
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/restaurants/")
+      .get("https://jake-4ww3-project-part-3.herokuapp.com/api/restaurants/")
       .then(({ data }) => setRest(data));
   }, []);
 

@@ -32,13 +32,16 @@ export default function SignupPage() {
     e.preventDefault();
     // Creates a new user by sending a POST req to the register endpoint
     axios
-      .post("http://localhost:5000/api/auth/register", {
-        firstName,
-        lastName,
-        email,
-        password,
-        gender,
-      })
+      .post(
+        "https://jake-4ww3-project-part-3.herokuapp.com/api/auth/register",
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+          gender,
+        }
+      )
       .then((res) => {
         console.log(res);
         setIsError(false);
