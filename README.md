@@ -1,7 +1,7 @@
 
 # Top Eats - [__try it out__](https://topeats.netlify.app/)
 
-Full stack web application that allows anyone to track their weightlifting workouts in the gym.
+Full stack web application that allows users to search (or create) restaurants and see (or add) reviews for them.
 
 ## Features
 - A search form that allows users to search for restaurants by: name, rating or location
